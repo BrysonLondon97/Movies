@@ -1,8 +1,7 @@
 import React from 'react';
 import {Text, StyleSheet} from 'react-native';
 import {SafeAreaView} from 'react-navigation';
-import {Button} from 'react-native-elements';
-import {LinearGradient} from 'expo-linear-gradient';
+import {Button} from 'react-native-elements'; 
 
 const Signup = ({navigation}) => {
 
