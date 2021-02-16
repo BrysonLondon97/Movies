@@ -10,6 +10,7 @@ export default (startDelay = 500) => {
             Animated.timing(transitionNum, { toValue: 0, useNativeDriver: false, duration: 3000}),
         ]).start(() => pulse());
         //grab new pho
+        
     };
 
     useEffect(() => {

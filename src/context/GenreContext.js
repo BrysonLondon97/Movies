@@ -17,7 +17,12 @@ const authReducer = (state,action) => {
 
 //declare a helper function that will signup a new user
 const addGenre = dispatch => {
-
+    return ({genres}) => {
+        dispatch({
+            type: 'add_genre',
+            payload: genres
+        })
+    }
 };
 
 //export the neccessary variables and helper functions to be known across the project
