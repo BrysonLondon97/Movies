@@ -1,5 +1,3 @@
-import TMDBImages from '../api/TMDBImages';
-import TMDBMovies from '../api/TMDBMovies';
 import TMDBGenres from '../api/TMDBGenres';
 import {useContext, useEffect} from 'react';
 import {StyleSheet, Text} from 'react-native';

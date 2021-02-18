@@ -1,6 +1,6 @@
 import React, {useRef, useContext, useState} from 'react';
 import {Text, StyleSheet, Animated, Dimensions, TouchableOpacity} from 'react-native';
-import {SafeAreaView} from 'react-navigation';
+import {SafeAreaView, NavigationEvents} from 'react-navigation';
 import {Button, Input} from 'react-native-elements';
 import LoginBackground from '../components/LoginBackground';
 import { Feather, MaterialIcons } from '@expo/vector-icons';
@@ -17,7 +17,7 @@ const Signin = ({navigation}) => {
     const toggle = useRef(true);
 
     //bring in the context variable
-    const {state, signin} = useContext(AuthContext);
+    const {state, signin, clearErrorMessage} = useContext(AuthContext);
 
     //create a state variable for email and password
     const [email, setEmail] = useState('');
@@ -77,7 +77,15 @@ const Signin = ({navigation}) => {
 
 
     return <SafeAreaView style={styles.background} forceInset={{top: 'always'}}>
+        
+        <NavigationEvents
+        
+            onWillFocus={() =>{
+                clearErrorMessage();
+            }}
             
+        />
+
         <LoginBackground />
 
         <Animated.View style={{top: transitionIconY, transform: [{rotate: transitionIcon}], alignSelf: 'center' }}>
