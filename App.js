@@ -5,6 +5,7 @@ import ExploreScreen from './src/screens/ExploreScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
 import LoadingScreen from './src/screens/LoadingScreen';
 import SettingsScreen from './src/screens/SettingsScreen';
+import DetailsScreen from './src/screens/DetailsScreen';
 
 //import neccessary libraries
 import {createStackNavigator} from 'react-navigation-stack';
@@ -101,13 +102,13 @@ const navigator = createSwitchNavigator({
     Profile: {
       screen: ProfileScreen,
       navigationOptions: {
-        
         tabBarIcon: ({tintColor}) => <FontAwesome name="user" size={24} color={tintColor} />
       }
     },
     Explore: {
       screen: ExploreScreen,
       navigationOptions: {
+        headerShown: true,
         tabBarIcon: ({tintColor}) => <MaterialIcons name="explore" size={24} color={tintColor} />
       }
     },
@@ -120,12 +121,13 @@ const navigator = createSwitchNavigator({
     
   }, {
     tabBarOptions: {
-      showLabel: false,
+      showLabel: true,
       activeTintColor: 'white',
       inactiveTintColor: 'black'
     },
     tabBarComponent: (props) => <CustomBottomBar {...props} />
-  })
+  }),
+  Details: DetailsScreen
 
 });
 

@@ -1,31 +1,65 @@
-import React, {useEffect, useState, useRef} from 'react';
+import React, {useEffect, useContext, useRef, useState} from 'react';
 import {View, Image, Animated, Button, StyleSheet, Dimensions} from 'react-native';
-import useFade from '../hooks/useFade';
-
-
+import {Context as MoviesContext} from '../context/MoviesContext';
+const TMDBImages = 'https://image.tmdb.org/t/p/original';
+const {height, width} = Dimensions.get('screen');
 
 
 const LoginBackground = ({run}) => {
-    const transitionNum1 = useFade();
+    const {state} = useContext(MoviesContext);
     
-    const screen = Dimensions.get("screen");
+    const [index, setIndex] = useState('');
 
-    const FadingImage = ({height = 200, width = 150, opacity = transitionNum}) => {
+    useEffect(() => {
+      setIndex(Math.floor(Math.random() * state.moviesNowPlaying.length))
+    }, [])
+
+    console.log([Math.floor(Math.random() * state.moviesNowPlaying.length)])
+
+    const useFade = (startDelay = 500) => {
+      const transitionNum = useRef(new Animated.Value(0)).current;
+  
+      const pulse = () => {
+          Animated.sequence([
+              Animated.timing(transitionNum, { toValue: 1, useNativeDriver: false, duration: 3000}),
+              Animated.timing(transitionNum, { toValue: 0, useNativeDriver: false, duration: 3000}),
+          ]).start(() => pulse());
+          //grab new pho
+          setIndex(Math.floor(Math.random() * state.moviesNowPlaying.length))
+      };
+  
+      useEffect(() => {
+          const timeout = setTimeout(() => pulse(), startDelay);
+          return () => clearTimeout(timeout);
+      }, []);
+  
+      return transitionNum;
+  };
+
+
+  const transitionNum1 = useFade();
+
+    const FadingImage = ({height, width, opacity = transitionNum}) => {
+      console.log(index);
+      if (index != 0) {
         return <Animated.Image
         style={[
           {
             width,
             height,
-            opacity
+            opacity,
+            resizeMode: 'contain'
           },
         ]}
-        source={require('../../assets/WonderWomen.jpg')}
+        source={{uri: TMDBImages + state.moviesNowPlaying[index].poster_path}}
       />
+      } else {
+        return null;
+      }
     };
 
-
     return <View style={styles.container} >
-        <FadingImage height={screen.height} width={screen.width} opacity={transitionNum1}/>
+        <FadingImage height={height} width={width} opacity={transitionNum1}/>
         
     </View>                
 

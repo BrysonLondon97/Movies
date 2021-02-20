@@ -32,7 +32,7 @@ const SearchResults = ({searchValue}) => {
             contentContainerStyle={{alignItems: 'center'}}
             numColumns={1}
             data={results}
-            keyExtractor={(item) => item.id}
+            keyExtractor={(item) => item.id.toString()}
             renderItem={({item}) => {
                 return (
                     <View style={styles.container} >

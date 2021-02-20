@@ -1,5 +1,5 @@
 import React, {useRef, useState, useEffect} from 'react';
-import {Text, StyleSheet, Dimensions, Animated, ScrollView, View} from 'react-native';
+import {Text, StyleSheet, Dimensions, Animated, View, TouchableOpacity} from 'react-native';
 import SearchBar from '../components/SearchBar';
 import {SafeAreaView} from 'react-navigation';
 import MoviesFlatList from '../components/MoviesFlatList';
@@ -10,7 +10,7 @@ const {height, width} = Dimensions.get('screen');
 
 
 
-const ExploreScreen = () => {
+const ExploreScreen = ({navigation}) => {
     const [searchValue, setSearchValue] = useState('');
 
     return <SafeAreaView style={styles.container} forceInset={{top: 'always'}}>
@@ -27,10 +27,18 @@ const ExploreScreen = () => {
         ?   <Animated.ScrollView
                 style={{top: 0 , height: 800}}
             >
+
                 <Text style={styles.sectionText}>Now Playing</Text>
-                <View style={{height: (344)}}>
-                    <MoviesFlatList data={'Now_Playing'} />   
-                </View>
+                <TouchableOpacity onPress={ () => {navigation.navigate('Details')} }>
+                    <View style={{height: (344)}}>
+                        <MoviesFlatList data={'Now_Playing'} />   
+                    </View>
+                </TouchableOpacity>
+                
+                
+
+
+
                 <Text style={styles.sectionText}>Popular</Text>
                 <View style={{height: (344)}}>
                     <MoviesFlatList data={'Popular'} />   
