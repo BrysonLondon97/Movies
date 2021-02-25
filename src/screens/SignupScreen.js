@@ -1,6 +1,6 @@
 import React, {useContext, useState} from 'react';
 import {Text, StyleSheet, View, Dimensions, TouchableOpacity} from 'react-native';
-import {SafeAreaView} from 'react-navigation';
+import {SafeAreaView, NavigationEvents} from 'react-navigation';
 import {Button, Input} from 'react-native-elements';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Feather, MaterialIcons } from '@expo/vector-icons';
@@ -11,7 +11,7 @@ const screen = Dimensions.get("screen");
 const Signup = ({navigation}) => {
 
     //bring in the context variable
-    const {state, signup} = useContext(AuthContext);
+    const {state, signup, clearErrorMessage} = useContext(AuthContext);
 
     //create a state variable for email and password
     const [email, setEmail] = useState('');
@@ -19,6 +19,15 @@ const Signup = ({navigation}) => {
 
 
     return <SafeAreaView forceInset={{top: 'always'}} style={styles.background}>
+        
+        <NavigationEvents
+        
+            onWillFocus={() =>{
+                clearErrorMessage();
+            }}
+            
+        />
+        
         <View style={styles.container}>
             <LinearGradient colors={['red', 'blue']} style={{flex: 1, borderRadius: 20}} >
                 <View style={{flex: 1, backgroundColor: 'white', borderRadius: 20, margin: 5}}>

@@ -29,33 +29,34 @@ const ExploreScreen = ({navigation}) => {
             >
 
                 <Text style={styles.sectionText}>Now Playing</Text>
-                <TouchableOpacity onPress={ () => {navigation.navigate('Details')} }>
-                    <View style={{height: (344)}}>
-                        <MoviesFlatList data={'Now_Playing'} />   
-                    </View>
-                </TouchableOpacity>
-                
-                
-
-
+                <View style={{height: (344)}}>
+                    <MoviesFlatList data={'Now_Playing'} navigationKey={navigation.state.key}/>   
+                </View>
+        
 
                 <Text style={styles.sectionText}>Popular</Text>
                 <View style={{height: (344)}}>
-                    <MoviesFlatList data={'Popular'} />   
+                    <MoviesFlatList data={'Popular'} navigationKey={navigation.state.key} />   
                 </View>
+
+
+
                 <Text style={styles.sectionText}>Top Rated</Text>
                 <View style={{height: (344)}}>
-                    <MoviesFlatList data={'Top_Rated'} />   
+                    <MoviesFlatList data={'Top_Rated'} navigationKey={navigation.state.key} />   
                 </View>
+
+
+
                 <Text style={styles.sectionText}>Upcoming</Text>
                 <View style={{height: (344)}}>
-                    <MoviesFlatList data={'Upcoming'} />   
+                    <MoviesFlatList data={'Upcoming'} navigationKey={navigation.state.key} />   
                 </View>
 
             </Animated.ScrollView>
         : <SearchResults 
             searchValue={searchValue}
-        
+            navigationKey={navigation.state.key}
         />
         }
     </SafeAreaView>

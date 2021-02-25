@@ -1,4 +1,4 @@
-import React, {useRef, useContext, useState} from 'react';
+import React, {useRef, useContext, useState, useEffect} from 'react';
 import {Text, StyleSheet, Animated, Dimensions, TouchableOpacity} from 'react-native';
 import {SafeAreaView, NavigationEvents} from 'react-navigation';
 import {Button, Input} from 'react-native-elements';
@@ -22,6 +22,7 @@ const Signin = ({navigation}) => {
     //create a state variable for email and password
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
 
     //create a animated function that transitions content upwards
     const transition = () => {
@@ -85,6 +86,7 @@ const Signin = ({navigation}) => {
             }}
             
         />
+
 
         <LoginBackground />
 

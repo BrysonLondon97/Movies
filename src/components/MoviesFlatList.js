@@ -1,6 +1,7 @@
 import React, {useRef, useContext, useEffect, useState} from 'react';
-import {FlatList, Animated, Text, View, Image, Dimensions, StyleSheet} from 'react-native'
+import {FlatList, Animated, Text, View, Image, Dimensions, StyleSheet, TouchableOpacity} from 'react-native'
 import {Context as MoviesContext} from '../context/MoviesContext';
+import {navigate} from '../navigationRef';
 
 const {width, height} = Dimensions.get('screen');
 const ITEM_SIZE = width * 0.5;
@@ -8,11 +9,11 @@ const SPACING = 10;
 const EMPTY_ITEM_SIZE = (width - ITEM_SIZE) / 2;
 const TMDBImages = 'https://image.tmdb.org/t/p/original';
 
-const MoviesFlatList = ({data}) => {
+const MoviesFlatList = ({data, navigationKey}) => {
     const scrollX = useRef(new Animated.Value(0)).current
     const {state} = useContext(MoviesContext);    
     const [movies, setMovies] = useState([])
-    
+
     useEffect(() => {
         switch (data){
             case 'Now_Playing':
@@ -62,15 +63,18 @@ const MoviesFlatList = ({data}) => {
 
 
                 return (
-                    <View style={{width: ITEM_SIZE}}>
-                        <Animated.View style={[styles.posterBackground, {transform: [{translateY}]}]}>
-                            <Image 
-                                style={styles.Image}
-                                source={{uri: TMDBImages + item.poster_path}}
-                            />
-                            <Text style={{fontSize: 24}} numberOfLines={1}>{item.title}</Text>
-                        </Animated.View>
-                    </View >
+                    <TouchableOpacity onPress={ () => {navigate('Details', {navigationKey, item})} }>
+                        <View style={{width: ITEM_SIZE}}>
+                            <Animated.View style={[styles.posterBackground, {transform: [{translateY}]}]}>
+                                <Image 
+                                    style={styles.Image}
+                                    source={{uri: TMDBImages + item.poster_path}}
+                                />
+                                <Text style={{fontSize: 24}} numberOfLines={1}>{item.title}</Text>
+                            </Animated.View>
+                        </View >
+                    </TouchableOpacity>
+                    
                 );
             }}
         />

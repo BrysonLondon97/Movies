@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import {FlatList, Image, View, StyleSheet, Text} from 'react-native';
+import {FlatList, Image, View, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import TMDBSearch from '../api/TMDBSearch';
-
+import {navigate} from '../navigationRef';
 const TMDBImages = 'https://image.tmdb.org/t/p/original';
 
 
-const SearchResults = ({searchValue}) => {
+const SearchResults = ({searchValue, navigationKey}) => {
     const [results, setResults] = useState([]);
 
     const searchTMDB = async () => {
@@ -36,16 +36,17 @@ const SearchResults = ({searchValue}) => {
             renderItem={({item}) => {
                 return (
                     <View style={styles.container} >
-                        <Image 
-                            style={styles.image}
-                            source={{uri: TMDBImages + item.poster_path}}
-                        />
-                        <Text style={{fontSize: 24}} numberOfLines={1}>{item.title}</Text>
+                        <TouchableOpacity onPress={ () => {navigate('Details', {navigationKey, item})}}>
+                            <Image 
+                                style={styles.image}
+                                source={{uri: TMDBImages + item.poster_path}}
+                            />
+                            <Text style={{fontSize: 24}} numberOfLines={1}>{item.title}</Text>
+                        </TouchableOpacity>
+                        
                     </View>
                 );
             }}
-        
-        
         />
     </View>
 

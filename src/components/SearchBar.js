@@ -18,8 +18,6 @@ const Search = ({searchValue, onValueChange, onValueSubmit}) => {
             onEndEditing = {onValueSubmit}
         
         />
-
-
     </View>
 }
 

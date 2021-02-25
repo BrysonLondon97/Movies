@@ -1,46 +1,20 @@
 import React, {useEffect, useContext, useRef, useState} from 'react';
-import {View, Image, Animated, Button, StyleSheet, Dimensions} from 'react-native';
+import {View, Image, Animated, Button, StyleSheet, Dimensions, Text} from 'react-native';
 import {Context as MoviesContext} from '../context/MoviesContext';
+import useFade from '../hooks/useFade';
 const TMDBImages = 'https://image.tmdb.org/t/p/original';
 const {height, width} = Dimensions.get('screen');
 
 
-const LoginBackground = ({run}) => {
+const LoginBackground = () => {
+    //grab the movies from the MoviesContext
     const {state} = useContext(MoviesContext);
-    
-    const [index, setIndex] = useState('');
+    const {transitionNum, index} = useFade();
 
-    useEffect(() => {
-      setIndex(Math.floor(Math.random() * state.moviesNowPlaying.length))
-    }, [])
+    //testing
+    console.log(index)
 
-    console.log([Math.floor(Math.random() * state.moviesNowPlaying.length)])
-
-    const useFade = (startDelay = 500) => {
-      const transitionNum = useRef(new Animated.Value(0)).current;
-  
-      const pulse = () => {
-          Animated.sequence([
-              Animated.timing(transitionNum, { toValue: 1, useNativeDriver: false, duration: 3000}),
-              Animated.timing(transitionNum, { toValue: 0, useNativeDriver: false, duration: 3000}),
-          ]).start(() => pulse());
-          //grab new pho
-          setIndex(Math.floor(Math.random() * state.moviesNowPlaying.length))
-      };
-  
-      useEffect(() => {
-          const timeout = setTimeout(() => pulse(), startDelay);
-          return () => clearTimeout(timeout);
-      }, []);
-  
-      return transitionNum;
-  };
-
-
-  const transitionNum1 = useFade();
-
-    const FadingImage = ({height, width, opacity = transitionNum}) => {
-      console.log(index);
+    const FadingImage = ({height, width, opacity}) => {
       if (index != 0) {
         return <Animated.Image
         style={[
@@ -58,11 +32,11 @@ const LoginBackground = ({run}) => {
       }
     };
 
+    console.log('Show Image')
     return <View style={styles.container} >
-        <FadingImage height={height} width={width} opacity={transitionNum1}/>
-        
+        <FadingImage height={height} width={width} opacity={transitionNum}/>
     </View>                
-
+  
 };
 
 const styles = StyleSheet.create({

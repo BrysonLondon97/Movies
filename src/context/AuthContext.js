@@ -77,8 +77,6 @@ const signup = dispatch => {
 //declare a helper function that will signin a existing user
 const signin = dispatch => {
     return async ({email, password}) => {
-        console.log(email);
-        console.log(password);
         try {
             const response = await movieServer.post('/signin', {email, password});
             await AsyncStorage.setItem('token', response.data.token);
