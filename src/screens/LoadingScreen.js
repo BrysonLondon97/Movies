@@ -8,15 +8,14 @@ import {Context as GenreContext} from '../context/GenreContext';
 const LoadingScreen = () => {
     const {tryLocalSignIn} = useContext(AuthContext);
     const {fetchMovies} = useContext(MoviesContext);
-    const {fetchGenres} = useContext(GenreContext);
+    const {fetchGenres, state} = useContext(GenreContext);
+
 
     useEffect(() =>{
         tryLocalSignIn();
         fetchMovies();
         fetchGenres();
     }, []);
-
-    //console.log(state);
 
     return null;
 };

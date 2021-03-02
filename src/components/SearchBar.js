@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     backgroundStyle:{
         backgroundColor: '#F0EEEE',
         height: 50,
-        borderRadius: 5,
+        borderRadius: 10,
         marginHorizontal: 15,
         marginTop: 10,
         flexDirection: 'row',

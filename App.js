@@ -134,7 +134,6 @@ const navigator = createSwitchNavigator({
       inactiveTintColor: 'black'
     },
     tabBarComponent: (props) => <CustomBottomBar {...props} />,
-    //initialRouteName: "Explore"
   }),
   Details: {
     screen: DetailsScreen,

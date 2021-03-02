@@ -5,11 +5,11 @@ import TMDBGenres from '../api/TMDBGenres';
 
 //declare a reducer function that will modify users data
 const authReducer = (state,action) => {
-    console.log(action.payload.genres)
+    //console.log(action.payload.genres)
     //switch over the different action types
     switch (action.type) {
         case 'add_genre':
-            return {genres: [action.payload.genres]}
+            return action.payload.genres
         default:
             return state
     }
@@ -23,7 +23,6 @@ const fetchGenres = dispatch => {
     const myAbortController = new AbortController();
 
     return async () => {
-
         try{
             const response = await TMDBGenres.get()
             dispatch({
@@ -34,9 +33,6 @@ const fetchGenres = dispatch => {
         } catch (e) {
             console.log(e)
         }
-
-
-
         
     }
 };
@@ -45,5 +41,5 @@ const fetchGenres = dispatch => {
 export const {Provider,Context} = createDataContext(
     authReducer,
     {fetchGenres},
-    {genres: []}
+    []
 );
